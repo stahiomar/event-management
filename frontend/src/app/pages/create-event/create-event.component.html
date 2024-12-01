@@ -1,0 +1,93 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-4">Add Event</h2>
+  <form [formGroup]="addEventForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label class="block text-gray-700" for="title">Title</label>
+      <input
+        type="text"
+        id="title"
+        formControlName="title"
+        class="border rounded w-full py-2 px-3 text-gray-700"
+      />
+      <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="text-red-500">
+        <div *ngIf="title?.errors?.['required']">Title is required.</div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700" for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="border rounded w-full py-2 px-3 text-gray-700"
+      ></textarea>
+      <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="text-red-500">
+        <div *ngIf="description?.errors?.['required']">Description is required.</div>
+        <div *ngIf="description?.errors?.['minlength']">Description must be at least 10 characters long.</div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700" for="location">Location</label>
+      <input
+        type="text"
+        id="location"
+        formControlName="location"
+        class="border rounded w-full py-2 px-3 text-gray-700"
+      />
+      <div *ngIf="location?.invalid && (location?.dirty || location?.touched)" class="text-red-500">
+        <div *ngIf="location?.errors?.['required']">Location is required.</div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700" for="date">Date</label>
+      <input
+        type="date"
+        id="date"
+        formControlName="date"
+        class="border rounded w-full py-2 px-3 text-gray-700"
+      />
+      <div *ngIf="date?.invalid && (date?.dirty || date?.touched)" class="text-red-500">
+        <div *ngIf="date?.errors?.['required']">Date is required.</div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700" for="time">Time</label>
+      <input
+        type="time"
+        id="time"
+        formControlName="time"
+        class="border rounded w-full py-2 px-3 text-gray-700"
+      />
+      <div *ngIf="time?.invalid && (time?.dirty || time?.touched)" class="text-red-500">
+        <div *ngIf="time?.errors?.['required']">Time is required.</div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700" for="type">Type</label>
+      <select
+        id="type"
+        formControlName="type"
+        class="border rounded w-full py-2 px-3 text-gray-700"
+      >
+        <option [value]="'ACADEMIC'">Academic</option>
+        <option [value]="'SPORT'">Sport</option>
+        <option [value]="'CULTURAL'">Cultural</option>
+      </select>
+      <div *ngIf="type?.invalid && (type?.dirty || type?.touched)" class="text-red-500">
+        <div *ngIf="type?.errors?.['required']">Type is required.</div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+      [disabled]="addEventForm.invalid"
+    >
+      Add Event
+    </button>
+  </form>
+</div>

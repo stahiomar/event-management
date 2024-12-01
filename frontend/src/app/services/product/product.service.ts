@@ -16,6 +16,6 @@ export class ProductService {
   }
 
   createProduct(product: Product): Observable<Product> {
-    return this.httpClient.post<Product>('http://localhost:9000/api/product', product);
+    return this.httpClient.post<Product>('http://localhost:9001/events', product);
   }
 }
