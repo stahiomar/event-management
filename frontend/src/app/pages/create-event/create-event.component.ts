@@ -1,19 +1,22 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgIf } from "@angular/common";
-import { EventService } from "../../services/event/event.service"; // Replace ProductService with EventService
+import { NgIf } from '@angular/common';
+import { EventService } from '../../services/event/event.service';
+import { OidcSecurityService } from 'angular-auth-oidc-client'; // Import the OIDC Security Service
 
 @Component({
   selector: 'app-create-event',
   standalone: true,
   imports: [ReactiveFormsModule, NgIf],
   templateUrl: './create-event.component.html',
-  styleUrl: './create-event.component.css'
+  styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent {
   addEventForm: FormGroup;
-  private readonly eventService = inject(EventService); // Inject EventService
-  eventCreated = false;
+  private readonly eventService = inject(EventService);
+  private readonly oidcSecurityService = inject(OidcSecurityService); // Inject OIDC Security Service
+  eventCreated = false; // To display success message
+  username = '';
 
   constructor(private fb: FormBuilder) {
     this.addEventForm = this.fb.group({
@@ -24,6 +27,13 @@ export class CreateEventComponent {
       time: ['', Validators.required],
       type: ['', Validators.required],
     });
+
+    // Get the username from OIDC Security Service
+    this.oidcSecurityService.userData$.subscribe(
+      ({ userData }) => {
+        this.username = userData?.preferred_username || '';
+      }
+    );
   }
 
   // Getter methods for form controls
@@ -53,6 +63,7 @@ export class CreateEventComponent {
 
   onSubmit() {
     if (this.addEventForm.valid) {
+      // Prepare the event object with the username as the owner
       const event = {
         title: this.addEventForm.get('title')?.value,
         description: this.addEventForm.get('description')?.value,
@@ -60,11 +71,18 @@ export class CreateEventComponent {
         date: this.addEventForm.get('date')?.value,
         time: this.addEventForm.get('time')?.value,
         type: this.addEventForm.get('type')?.value,
+        owner: this.username,  // Add the owner attribute (username)
       };
 
+      // Create the event using the EventService
       this.eventService.createEvent(event).subscribe(() => {
         this.eventCreated = true;
         this.addEventForm.reset();
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          this.eventCreated = false;
+        }, 5000);
       });
     } else {
       console.log('Form is not valid');

@@ -1,14 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {OidcSecurityService} from "angular-auth-oidc-client";
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { Router } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
+
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule, MatMenuModule, MatIconModule],
+  imports: [RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

@@ -1,0 +1,24 @@
+.profile-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.profile-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.profile-field {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.profile-field strong {
+  margin-right: 10px;
+}

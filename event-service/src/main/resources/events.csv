@@ -1,0 +1,7 @@
+id,title,description,location,date,time,type,owner
+1,Annual Science Conference,An academic event discussing recent innovations in science,New York,2024-05-10,09:00,ACADEMIC,Dr. Smith
+2,Football Tournament,An inter-college football competition,Los Angeles,2024-06-15,15:00,SPORT,John Doe
+3,Cultural Night,An evening of cultural performances,San Francisco,2024-07-20,18:30,CULTURAL,Jane Doe
+4,AI Workshop,A hands-on workshop on Artificial Intelligence,Chicago,2024-08-05,10:00,ACADEMIC,Prof. Adams
+5,Community Run,A 5k charity run event in the local park,Boston,2024-09-10,07:30,SPORT,Michael Brown
+6,Art Exhibition,Exhibition of local artists,Los Angeles,2024-10-25,14:00,CULTURAL,Sarah Lee

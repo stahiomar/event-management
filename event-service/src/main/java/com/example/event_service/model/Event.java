@@ -22,4 +22,5 @@ public class Event {
     private LocalDate date;
     private String time;
     private TYPE type;
+    private String owner;
 }

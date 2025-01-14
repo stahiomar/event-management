@@ -1,0 +1,57 @@
+<div *ngIf="isAuthenticated; else notAuthenticated">
+  <h1 class="title">Upcoming Events</h1>
+
+  <!-- Search Filters -->
+  <div class="search-filters">
+    <input
+      type="text"
+      placeholder="Search by Name"
+      [(ngModel)]="searchName"
+      (ngModelChange)="filterEvents()"
+      class="search-input"
+    />
+    <input
+      type="text"
+      placeholder="Search by Location"
+      [(ngModel)]="searchLocation"
+      (ngModelChange)="filterEvents()"
+      class="search-input"
+    />
+    <select
+      [(ngModel)]="searchType"
+      (ngModelChange)="filterEvents()"
+      class="search-input"
+    >
+      <option value="">All Types</option>
+      <option value="ACADEMIC">Academic</option>
+      <option value="SPORT">Sport</option>
+      <option value="CULTURAL">Cultural</option>
+    </select>
+  </div>
+
+  <!-- Event Cards -->
+  <div class="events-container">
+    <div class="event-card" *ngFor="let event of filteredEvents">
+      <h3 class="event-title">{{ event.title }}</h3>
+      <p class="event-description">{{ event.description }}</p>
+      <p><strong>Date:</strong> {{ event.date | date: 'fullDate' }}</p>
+      <p><strong>Time:</strong> {{ event.time }}</p>
+      <p><strong>Location:</strong> {{ event.location }}</p>
+      <span class="event-type" [ngClass]="event.type.toLowerCase()">
+        {{ event.type }}
+      </span>
+      <div class="event-actions">
+        <button class="btn btn-update" (click)="updateEvent(event)">Update</button>
+        <button class="btn btn-delete" (click)="deleteEvent(event.id)" *ngIf="event.id !== undefined">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+        (click)="navigateToCreateEvent()">Create event
+</button>
+
+
+<ng-template #notAuthenticated>
+  <p class="not-authenticated-message">Please log in to view events.</p>
+</ng-template>

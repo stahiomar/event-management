@@ -6,6 +6,7 @@ export interface Event {
   date: string;
   time: string;
   type: EventType;
+  owner: string;
 }
 
 export enum EventType {
