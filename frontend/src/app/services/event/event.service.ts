@@ -12,8 +12,7 @@ export class EventService {
   constructor(private http: HttpClient) {}
 
   createEvent(event: any): Observable<any> {
-    return this.http.post<Array<Event>>('http://localhost:9000/events', event);
-    //return this.http.post('/event-service/events', event);
+    return this.http.post('/event-service/events', event);
   }
 
   getEvents(): Observable<Array<Event>> {
